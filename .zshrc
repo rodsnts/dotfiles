@@ -18,9 +18,36 @@ export FZF_DEFAULT_OPTS=" \
 alias nvcfg="nvim ~/.config/nvim"
 alias tmcfg="nvim ~/.config/tmux/tmux.conf"
 
-alias opnv='nvim "$(find ~/Documents/* -type d ! -path "*/Work/*/*" ! -path "*/Dev/*/*" | fzf)"'
-alias opt='find $HOME/Documents/* -type d ! -path "*/Work/*/*" ! -path "*/Dev/*/*" | fzf | xargs -i sh -c "tmux new -s {} -c {} -d && tmux switch -t {}"'
-alias opd='cd "$(find ~/Documents/* -type d ! -path "*/Work/*/*" ! -path "*/Dev/*/*" | fzf)"'
+fuzzy_repo_tmux() {
+  local WORK_DIR="$HOME/Documents/Work"
+  local DEV_DIR="$HOME/Documents/Dev"
+
+  local work_repos=$(find "$WORK_DIR" -maxdepth 1 -mindepth 1 -type d -exec basename {} \;)
+  local dev_repos=$(find "$DEV_DIR" -maxdepth 1 -mindepth 1 -type d -exec basename {} \;)
+
+  local all_repos=$(printf "%s\n%s\n" "$work_repos" "$dev_repos")
+
+  local selected_repo=$(echo "$all_repos" | fzf)
+
+  if [ -n "$selected_repo" ]; then
+    local repo_path=""
+    if [[ -d "$WORK_DIR/$selected_repo" ]]; then
+      repo_path="$WORK_DIR/$selected_repo"
+    elif [[ -d "$DEV_DIR/$selected_repo" ]]; then
+      repo_path="$DEV_DIR/$selected_repo"
+    else
+      echo "Repository not found."
+      return 1
+    fi
+
+    tmux new -d -s "$selected_repo" -c "$repo_path"
+    tmux switch -t "$selected_repo"
+  else
+    echo "No selection"
+  fi
+}
+
+alias opt=fuzzy_repo_tmuxalias
 alias cd='z'
 
 eval "$(zoxide init zsh)"
