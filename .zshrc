@@ -2,7 +2,11 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="gentoo"
 
-plugins=(git)
+plugins=(
+  git
+  npm
+  zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
