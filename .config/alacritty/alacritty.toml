@@ -1,5 +1,6 @@
-shell = "/bin/zsh"
 live_config_reload = true
+[env]
+term = "alacritty"
 
 [window]
 dimensions = { columns = 169, lines = 38 }

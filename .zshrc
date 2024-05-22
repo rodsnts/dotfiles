@@ -43,7 +43,7 @@ fuzzy_repo_tmux() {
     tmux new -d -s "$selected_repo" -c "$repo_path"
     tmux switch -t "$selected_repo"
   else
-    echo "No selection"
+    echo ""
   fi
 }
 
@@ -52,6 +52,4 @@ alias cd='z'
 alias ls='ls --color=auto -lah'
 eval "$(zoxide init zsh)"
 
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
-fi
+source /usr/share/nvm/init-nvm.sh

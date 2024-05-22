@@ -1,0 +1,55 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["custom/music"],
+  "modules-right": ["pulseaudio", "network","clock", "tray", "custom/lock"],
+  "hyprland/workspaces": {
+    "persistent-workspaces": {
+      "HDMI-A-1": 4 // but only three on HDMI-A-1
+    },
+    "active-only": false,
+    "disable-scroll": true,
+    "sort-by-name": true,
+    "format": " {icon} ",
+    "format-icons": {
+      "default": "",
+    },
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
+  "custom/music": {
+    "format": "  {}",
+    "escape": true,
+    "interval": 5,
+    "tooltip": false,
+    "exec": "playerctl metadata --format='{{ title }}'",
+    "on-click": "playerctl play-pause",
+    "max-length": 50
+  },
+  "network": {
+    "interface": "wlan0",
+    "format-wifi": "  {ipaddr}",
+    "format-disconnected": "",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  },
+  "clock": {
+    "timezone": "Europe/London",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "🕑 {:%d/%m/%Y}",
+    "format": "🕑 {:%H:%M}"
+  },
+  "pulseaudio": {
+    "scroll-step": 1,
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", " "]
+    },
+    "on-click": "pavucontrol"
+  },
+}
