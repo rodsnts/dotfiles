@@ -4,12 +4,12 @@ term = "alacritty"
 
 [window]
 dimensions = { columns = 169, lines = 38 }
-padding = {x = 0, y = 0}
+padding = { x = 0, y = 0 }
 opacity = 0.9
 blur = true
 
 [font]
-size = 16.5
+size = 18
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"

@@ -6,7 +6,7 @@ return {
   config = function()
     vim.opt.background = "dark"
     require("catppuccin").setup({
-     transparent_background = false,
+     transparent_background = true,
     })
 
     vim.cmd([[colorscheme catppuccin-mocha]])
