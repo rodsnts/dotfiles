@@ -28,7 +28,7 @@ return {
       ensure_installed = {
         "lua_ls",
         "rust_analyzer",
-        "tsserver",
+        "ts_ls",
       },
       handlers = {
         function(server_name) -- default handler (optional)
@@ -78,6 +78,8 @@ return {
 
     vim.diagnostic.config({
       -- update_in_insert = true,
+      virtual_text = true,
+      --virtual_lines = true,
       float = {
         focusable = false,
         style = "minimal",

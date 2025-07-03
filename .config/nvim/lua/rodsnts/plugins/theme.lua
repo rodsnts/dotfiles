@@ -9,6 +9,6 @@ return {
      transparent_background = false,
     })
 
-    vim.cmd([[colorscheme catppuccin-mocha]])
+    vim.cmd([[colorscheme tokyonight-night]])
   end
 }
