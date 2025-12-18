@@ -5,15 +5,13 @@ return {
   lazy= false,
   dependencies = {
     "nvim-lua/plenary.nvim",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   config = function()
     require('telescope').setup({
       pickers = {
         find_files = {
-          theme = "ivy",
           hidden = true
-        }
+        },
       },
       defaults = {
         file_ignore_patterns = {
@@ -23,7 +21,12 @@ return {
         }
       },
       extensions = {
-        fzf = {}
+        fzf = {
+          fuzzy = true,                    -- false will only do exact matching
+          override_generic_sorter = true,  -- override the generic sorter
+          override_file_sorter = true,     -- override the file sorter
+          case_mode = "smart_case",
+        }
       }
     })
 
@@ -31,6 +34,8 @@ return {
     vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
     vim.keymap.set('n', '<leader>ps', builtin.live_grep, {})
     vim.keymap.set('n', '<leader>b', builtin.buffers, {})
-    vim.keymap.set('n', '<leader>fb', builtin.current_buffer_fuzzy_find, { desc = 'Search in current buffer' })
+    vim.keymap.set('n', '<leader>pb', builtin.current_buffer_fuzzy_find, { desc = 'Search in current buffer' })
+
+    require "rodsnts.telescope.multigrep".setup()
   end
 }

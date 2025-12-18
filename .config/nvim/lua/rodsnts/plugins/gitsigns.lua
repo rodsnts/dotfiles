@@ -9,5 +9,7 @@ return {
     })
     local gitsigns = require('gitsigns')
     vim.keymap.set('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+    --enable the above 
+    vim.cmd[[Gitsigns toggle_current_line_blame]]
   end
 }
